@@ -8,6 +8,8 @@ GPU: NVIDIA GeForce RTX 2070 SUPER
 
 CUDA version: 11.1
 
+ROS Noetic
+
 # How to use this repository
 1. Install anaconda and create your own virtual environment.
 ````
@@ -26,3 +28,13 @@ pip install -r requirements.txt  # install
 cd yolov5
 https://github.com/kistvision/collabot.git  # clone
 ````
+
+# Execution
+1. Open Terminal and execute roscore
+````
+roscore
+````
+
+2. Execute detect_book_state.py
+
+
