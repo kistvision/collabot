@@ -12,6 +12,8 @@ CUDA version: 11.1
 1. git clone YOLO v5 repository and install requirements.txt in YOLO v5 repo 
 
     git clone https://github.com/ultralytics/yolov5  # clone
+   
     cd yolov5
+   
     pip install -r requirements.txt  # install
 
