@@ -9,10 +9,15 @@ GPU: NVIDIA GeForce RTX 2070 SUPER
 CUDA version: 11.1
 
 # How to use this repository
-1. git clone YOLO v5 repository and install requirements.txt in YOLO v5 repo 
+1. git clone YOLO v5 repository and install requirements.txt.
 ````
 git clone https://github.com/ultralytics/yolov5  # clone
 cd yolov5
 pip install -r requirements.txt  # install
 ````
+2. git clone this repository in your workspace
+````
+cd yolov5
+git clone https://github.com/ultralytics/yolov5  # clone
 
+````
