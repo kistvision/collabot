@@ -18,7 +18,8 @@ print(ROOT)
 
 class DetectBook:
     def __init__(self):
-        self.pub = rospy.Publisher('/change', String, queue_size=5)
+        self.change_pub = rospy.Publisher('/change', String, queue_size=5)
+        self.no_detect_pub = rospy.Publisher('/no_detect', String, queue_size=5)
         self.sub = rospy.Subscriber('/bookcase_state', String, callback=self.callback)
         self.opt = self.parser_opt()
         self.detect_drawer = DetectDrawer(**vars(self.opt))
@@ -36,6 +37,13 @@ class DetectBook:
         if msgs.data == 'open':
             self.find_drawer = True
 
+    def no_detect_publish(self):
+        msg = String()
+
+        msg.data = 'no detect'
+
+        self.no_detect_pub.publish(msg)
+
 
     def publish(self):
         # state: diff
@@ -47,7 +55,7 @@ class DetectBook:
         else:
             msg.data = ''
 
-        self.pub.publish(msg)
+        self.change_pub.publish(msg)
 
 
     # yolo parameters
@@ -89,11 +97,17 @@ class DetectBook:
                     self.roi = self.detect_drawer.avg_roi
 
                     self.find_drawer = False
+                    
+                    start_detect = rospy.get_rostime()
 
             
             if self.roi is not None and self.find_drawer is False:
+                now = rospy.get_rostime()                
                 roi_img, ori_img, self.trig = self.optical_flow.run(frame, self.roi)
                 
+                if start_detect.secs - now.secs > 10:
+                    self.no_detect_publish()
+
                 if self.trig:
                     rospy.loginfo(str(self.trig))
                     self.book_state = True
@@ -109,7 +123,7 @@ class DetectBook:
 
                 cv2.imshow('roi_img', roi_img)
             
-            if cv2.waitKey(1000//30) & 0xFF == ord('q'):
+            if cv2.waitKey(1000//fps) & 0xFF == ord('q'):
                 rospy.loginfo('quit')
                 break
 
