@@ -36,6 +36,7 @@ roscore
 ````
 
 2. Execute detect_book_state.py
+   
    1.Change the weights file path    
   ````  
   # yolo parameters
