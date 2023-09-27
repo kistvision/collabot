@@ -38,19 +38,18 @@ roscore
 2. Execute detect_book_state.py
    
    1.Change the weights file path    
-  ````  
-  # yolo parameters
-    def parser_opt(self):
-        parser = argparse.ArgumentParser()
-        parser.add_argument('--weights', nargs='+', type=str, default=ROOT / 'runs/train/only_0822/weights/best.pt', help='model path or triton URL')     
-  ````
-
-  2.Choose whether to use video or camera. If you use camera, write the camera number. If you use video, write the video path. 
-  ````
-    # Using Camera
-    source = 0
+     ````  
+     # yolo parameters
+       def parser_opt(self):
+           parser = argparse.ArgumentParser()
+           parser.add_argument('--weights', nargs='+', type=str, default=ROOT / 'runs/train/only_0822/weights/best.pt', help='model path or triton URL')     
+     ````
+   2.Choose whether to use video or camera. If you use camera, write the camera number. If you use video, write the video path. 
+     ````
+       # Using Camera
+       source = 0
     
-    # Using video
-    source = '/home/vision/catkin_ws/src/Collabot/datasets/data_0822/video/57.mp4'
-  ````
+       # Using video
+       source = '/home/vision/catkin_ws/src/Collabot/datasets/data_0822/video/57.mp4'
+     ````
 
