@@ -52,4 +52,5 @@ roscore
        # Using video
        source = '/home/vision/catkin_ws/src/Collabot/datasets/data_0822/video/57.mp4'
      ````
+     
    3. Execute detect_book_state.py 
