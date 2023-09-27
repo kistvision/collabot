@@ -18,8 +18,7 @@ print(ROOT)
 
 class DetectBook:
     def __init__(self):
-        self.change_pub = rospy.Publisher('/change', String, queue_size=5)
-        self.no_detect_pub = rospy.Publisher('/no_detect', String, queue_size=5)
+        self.pub = rospy.Publisher('/detect', String, queue_size=5)
         self.sub = rospy.Subscriber('/bookcase_state', String, callback=self.callback)
         self.opt = self.parser_opt()
         self.detect_drawer = DetectDrawer(**vars(self.opt))
@@ -37,25 +36,18 @@ class DetectBook:
         if msgs.data == 'open':
             self.find_drawer = True
 
-    def no_detect_publish(self):
-        msg = String()
-
-        msg.data = 'no detect'
-
-        self.no_detect_pub.publish(msg)
-
 
     def publish(self):
         # state: diff
         msg = String()
 
         if self.book_state: 
-            msg.data = 'diff'
+            msg.data = 'detect'
         
         else:
-            msg.data = ''
+            msg.data = 'no detect'
 
-        self.change_pub.publish(msg)
+        self.pub.publish(msg)
 
 
     # yolo parameters
@@ -102,11 +94,12 @@ class DetectBook:
 
             
             if self.roi is not None and self.find_drawer is False:
-                now = rospy.get_rostime()                
+                now = rospy.get_rostime() 
+                               
                 roi_img, ori_img, self.trig = self.optical_flow.run(frame, self.roi)
                 
                 if start_detect.secs - now.secs > 10:
-                    self.no_detect_publish()
+                    self.publish()
 
                 if self.trig:
                     rospy.loginfo(str(self.trig))
