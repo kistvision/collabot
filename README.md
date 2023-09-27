@@ -53,4 +53,9 @@ roscore
        source = '/home/vision/catkin_ws/src/Collabot/datasets/data_0822/video/57.mp4'
      ````
      
-   3. Execute detect_book_state.py 
+   3. Execute detect_book_state.py
+     ````
+     cd yolov5
+     python detect_book_state.py
+     ````
+      
