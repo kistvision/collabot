@@ -46,10 +46,10 @@ roscore
      ````
    2. Choose whether to use video or camera. If you use camera, write the camera number. If you use video, write the video path. 
      ````
-       # Using Camera
+     # Using Camera
        source = 0
      
-       # Using video
+     # Using video
        source = '/home/vision/catkin_ws/src/Collabot/datasets/data_0822/video/57.mp4'
      ````
      
