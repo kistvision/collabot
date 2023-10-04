@@ -26,7 +26,7 @@ pip install -r requirements.txt  # install
 3. git clone this repository in your workspace
 ````
 cd yolov5
-https://github.com/kistvision/collabot.git  # clone
+git clone https://github.com/kistvision/collabot.git  # clone
 ````
 
 # Execution
