@@ -12,7 +12,7 @@ from utils.torch_utils import select_device
 from utils.augmentations import letterbox
 
 
-ROOT = '/home/vision/catkin_ws/src/enbang/CollatBot/yolov5'  # YOLOv5 root dir
+ROOT = '/home/kist/yolov5'  # YOLOv5 root dir
 
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
@@ -22,7 +22,7 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
 class DetectDrawer:
     def __init__(self,
-                 weights=ROOT / 'runs/train/all_drawer_yolov5l_8/weights/best.pt',
+                 weights='./weights/best.pt',
                  data=ROOT / 'data/collatbot.yaml',  # dataset.yaml path
                  imgsz=(640, 640),  # inference size (height, width)
                  device='',  # cuda device, i.e. 0 or 0,1,2,3 or cpu
@@ -98,5 +98,5 @@ class DetectDrawer:
 
             if len(self.bbox_coordinates) == bbox_num and self.avg_roi == None:
                 self.avg_roi = self.compute_avg_roi(self.bbox_coordinates)
-
+                self.bbox_coordinates = []
                 return 
